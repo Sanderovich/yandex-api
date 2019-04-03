@@ -41,7 +41,7 @@ class RequestFactory
      */
     public function get(string $request)
     {
-       if ($this->requests->array_key_exists($request)) {
+       if (array_key_exists($request, $this->requests)) {
            return $this->requests[$request];
        }
 
