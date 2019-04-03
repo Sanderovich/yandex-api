@@ -34,7 +34,7 @@ class Translator
      * @return mixed
      * @throws Exceptions\YandexException
      */
-    public function getSupportedLanguages(string $filter)
+    public function getSupportedLanguages(string $filter = '')
     {
         $request = $this->factory->get('languages');
         $request->setParameters([
