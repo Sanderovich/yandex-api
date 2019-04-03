@@ -29,12 +29,19 @@ class Translator
     /**
      * Get supported languages / translations by Yandex
      *
+     * @param string $filter
+     *
      * @return mixed
      * @throws Exceptions\YandexException
      */
-    public function getSupportedLanguages()
+    public function getSupportedLanguages(string $filter)
     {
-        return $this->factory->get('languages')->send();
+        $request = $this->factory->get('languages');
+        $request->setParameters([
+            'ui' => $filter,
+        ]);
+
+        return $request->send();
     }
 
     /**

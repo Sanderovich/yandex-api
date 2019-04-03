@@ -16,8 +16,6 @@ class SupportedLanguagesRequest extends Request
      */
     public function __construct(string $key)
     {
-        parent::__construct($key, '/getLangs', [
-            'ui' => '',
-        ]);
+        parent::__construct($key, '/getLangs');
     }
 }
