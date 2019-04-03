@@ -3,6 +3,8 @@
 namespace Yandex\Requests;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use Yandex\Exceptions\YandexException;
 
 /**
  * Class Request
@@ -73,6 +75,7 @@ abstract class Request
      * Send API request to Yandex
      *
      * @return mixed
+     * @throws YandexException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function send()
@@ -82,7 +85,11 @@ abstract class Request
             'key' => $this->key
         ]);
 
-        $response  = $this->client->request($this->method, self::URL . $this->path, $this->parameters);
+        try {
+            $response  = $this->client->request($this->method, self::URL . $this->path, $this->parameters);
+        } catch (ClientException $exception) {
+            throw new YandexException($exception->getMessage(), $exception->getCode());
+        }
 
         return json_decode($response->getBody());
     }
