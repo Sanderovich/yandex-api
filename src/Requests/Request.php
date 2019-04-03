@@ -42,7 +42,7 @@ abstract class Request
      *
      * @var string
      */
-    private $key = "";
+    private $key;
 
     /**
      * @var GuzzleHttp\Client
@@ -78,17 +78,14 @@ abstract class Request
      */
     public function send()
     {
-        $options = [
+        // Add default parameter to the request
+        $this->addParameters([
             'query' => [
-                'key' => $this->key,
-            ],
-        ];
+                'key' => $this->key
+            ]
+        ]);
 
-        foreach ($this->parameters as $parameter => $value) {
-            $options['query'][$parameter] = $value;
-        }
-
-        $response  = $this->client->request($this->method, self::URL . $this->path, $options);
+        $response  = $this->client->request($this->method, self::URL . $this->path, $this->parameters);
 
         return json_decode($response->getBody());
     }
@@ -101,5 +98,15 @@ abstract class Request
     public function setParameters(array $parameters)
     {
         $this->parameters = $parameters;
+    }
+
+    /**
+     * Add parameter to the existing parameters
+     *
+     * @param array $parameters
+     */
+    private function addParameters(array $parameters) : void
+    {
+        $this->parameters = array_merge($this->parameters, $parameters);
     }
 }
