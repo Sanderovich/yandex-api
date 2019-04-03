@@ -79,9 +79,7 @@ abstract class Request
     {
         // Add default parameter to the request
         $this->addParameters([
-            'query' => [
-                'key' => $this->key
-            ]
+            'key' => $this->key
         ]);
 
         $response  = $this->client->request($this->method, self::URL . $this->path, $this->parameters);
@@ -90,22 +88,14 @@ abstract class Request
     }
 
     /**
-     * Set parameters for the request
-     *
-     * @param array $parameters
-     */
-    public function setParameters(array $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
-    /**
      * Add parameter to the existing parameters
      *
      * @param array $parameters
      */
-    private function addParameters(array $parameters) : void
+    public function addParameters(array $parameters) : void
     {
-        $this->parameters = array_merge($this->parameters, $parameters);
+        foreach ($parameters as $parameter => $value) {
+            $this->parameters['query'][$parameter] = $value;
+        }
     }
 }
