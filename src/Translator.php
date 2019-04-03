@@ -29,16 +29,16 @@ class Translator
     /**
      * Get supported languages / translations by Yandex
      *
-     * @param string $filter
+     * @param string $ui
      *
      * @return mixed
      * @throws Exceptions\YandexException
      */
-    public function getSupportedLanguages(string $filter = '')
+    public function getSupportedLanguages(string $ui = '')
     {
         $request = $this->factory->get('languages');
         $request->setParameters([
-            'ui' => $filter,
+            'ui' => $ui,
         ]);
 
         return $request->send();
