@@ -26,9 +26,9 @@ class RequestFactory
     public function __construct(string $key)
     {
         $this->requests = [
-            'languages' => new SupportedLanguagesRequest($key),
-            'detect_language' => new DetectLanguageRequest($key),
-            'translate' => new TranslateRequest($key),
+            'languages'         => new SupportedLanguagesRequest($key),
+            'detect_language'   => new DetectLanguageRequest($key),
+            'translate'         => new TranslateRequest($key),
         ];
     }
 
