@@ -65,7 +65,6 @@ abstract class Request
         $this->method = $method;
 
         $this->client = new Client([
-            'verify' => __DIR__ . '/../../cacert.pem',
             'base_uri' => self::URL
         ]);
     }
