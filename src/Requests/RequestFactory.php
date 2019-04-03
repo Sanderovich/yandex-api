@@ -11,8 +11,6 @@ use Yandex\Exceptions\YandexException;
  */
 class RequestFactory
 {
-    // Foo
-    
     /**
      * List of requests
      *
