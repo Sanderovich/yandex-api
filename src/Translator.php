@@ -37,7 +37,7 @@ class Translator
     public function getSupportedLanguages(string $ui = '')
     {
         $request = $this->factory->get('languages');
-        $request->setParameters([
+        $request->addParameters([
             'ui' => $ui,
         ]);
 
@@ -58,11 +58,11 @@ class Translator
     public function translate(string $text, string $language, string $format = 'plain', int $options = 0)
     {
         $request = $this->factory->get('translate');
-        $request->setParameters([
-            'text'       => $text,
+        $request->addParameters([
+            'text'       => urlencode($text),
             'lang'       => $language,
             'format'     => $format,
-            'options'    => $options
+            'options'    => $options,
         ]);
 
         return $request->send();
@@ -80,8 +80,8 @@ class Translator
     public function detect(string $text, array $hints = [])
     {
         $request = $this->factory->get('detect_language');
-        $request->setParameters([
-            'text' => $text,
+        $request->addParameters([
+            'text' => urlencode($text),
             'hints' => $hints,
         ]);
 
